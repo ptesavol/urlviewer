@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			Test Page for the game client
+		</title>
+		<script type="text/javascript" src="callbackbuffer.js"></script>
+		<script type="text/javascript" src="websocketconnection.js"></script>
+		<script type="text/javascript" src="rpccommunicator.js"></script>
+		<script type="text/javascript" src="websocketrpcconnection.js"></script>
+		<script type="text/javascript" src="gameclient.js"></script>
+		
+		<script type="text/javascript">
+		
+		function DemoController()
+			{
+			var self = this;
+			
+			self.setStickPosition = function(position)
+				{
+				console.log("DemoController::setStickPosition() "+position);
+				};
+			
+			self.getStickPosition = function(connectionId, callback)
+				{
+				console.log("DemoController::getStickPosition() ");
+				callback(null, [666,667]);
+				};
+				
+			self.clientConnected = function()
+				{
+				
+				gameClient.exposeRpcMethod("setStickPosition", self, self.setStickPosition);
+				gameClient.exposeRpcMethod("getStickPosition", self, self.getStickPosition);
+				
+				// The first parameter is the screen id
+				// The last parameter is the callback, which must be null
+				// if the call expects no return value. 
+				// The second-last parameter is the object the callback should be 
+				// invoked in. 
+				
+				/*
+				gameClient.callScreenRpc(1, "sayHi", ["Terve teille!"],  self, null);	
+				
+				gameClient.callScreenRpc(1, "getGameState", [],  self, function(err, data)
+					{
+					console.log(data.winner);
+					});
+				*/			
+				};
+			};
+		
+		var demoController= new DemoController();				
+		
+		window.onload = function() 
+			{
+			var id = getGetParameter("id");
+			if (!id)
+				id = 1;
+				
+			gameClient.connect("localhost", 2777, id, demoController.clientConnected);	
+			};	
+		
+						
+		</script> 
+	</head>
+	
+	<body>
+		<h1 id="title">GameController testing</h1>	
+	</body>
+</html>

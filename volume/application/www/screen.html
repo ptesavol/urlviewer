@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<script type="text/javascript" src="callbackbuffer.js"></script>
+		<script type="text/javascript" src="websocketconnection.js"></script>
+		<script type="text/javascript" src="rpccommunicator.js"></script>
+		<script type="text/javascript" src="websocketrpcconnection.js"></script>
+		<script type="text/javascript" src="spaceify.js"></script>
+		
+		<script type="text/javascript">
+				
+		EDGE_HOSTNAME = window.location.hostname;
+                document.domain = window.location.hostname;         // Same Origin Policy, bigscreen has the same 
+
+		function UrlViewerScreen()
+			{
+			var self = this;
+			
+			self.showUrl = function(url)
+				{
+				console.log("UrlViewerScreen::showUrl() "+url);
+				document.getElementById("contentFrame").src = url;
+				};
+		
+			
+			self.onSpaceifyConnected = function()
+				{
+				console.log("UrlViewerScreen::spaceifyConnected()");
+					
+				spaceify.getConnection("spaceify.org/services/urlviewerscreen").exposeRpcMethod("showUrl", self, self.showUrl);
+				};	
+			}
+		
+		var urlViewerScreen= new UrlViewerScreen();				
+		
+		window.onload = function() 
+			{
+                        spaceify.connect(["spaceify.org/services/urlviewerscreen"], urlViewerScreen.onSpaceifyConnected);        				
+			};	
+		
+						
+		</script> 
+	</head>
+	
+	<body style="margin:0px;padding:0px;overflow:hidden">
+		<iframe id="contentFrame" style="overflow:hidden;height:600px;width:100%" height="600px" width="100%"></iframe>	
+	</body>
+</html>
