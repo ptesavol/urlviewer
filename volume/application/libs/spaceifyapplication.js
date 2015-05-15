@@ -50,9 +50,9 @@ var WebServer = require(API_PATH+"webserver");
 
 Manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH+"spaceify.manifest", "utf8"));
 
-var WebSocketRpcConnection = require("./websocketrpcconnection.js");
-var RpcCommunicator = require("./rpccommunicator.js");
-var WebSocketServer = require("./websocketserver.js");
+var WebSocketRpcConnection = require("./communication/websocketrpcconnection.js");
+var RpcCommunicator = require("./communication/rpccommunicator.js");
+var WebSocketServer = require("./communication/websocketserver.js");
 
 function ProvidedService(serviceName)
 {

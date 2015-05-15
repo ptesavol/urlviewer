@@ -1,6 +1,6 @@
 "use strict";
 
-var spaceify = require("./spaceifyapplication/spaceifyapplication.js");
+var spaceify = require("./libs/spaceifyapplication.js");
 
 
 function UrlViewer()

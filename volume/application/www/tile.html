@@ -45,11 +45,11 @@
                 	var requiredResources =
                         	[
                         	{createtag: "style",  context: head, src: "tile.css" },
-                        	{createtag: "script", context: head, src: "callbackbuffer.js", type: "text/javascript"},
-                        	{createtag: "script", context: head, src: "websocketconnection.js", type: "text/javascript"},
-                        	{createtag: "script", context: head, src: "rpccommunicator.js", type: "text/javascript"},
-                        	{createtag: "script", context: head, src: "websocketrpcconnection.js", type: "text/javascript"},
-                        	{createtag: "script", context: head, src: "spaceify.js", type: "text/javascript"}
+                        	{createtag: "script", context: head, src: "libs/communication/callbackbuffer.js", type: "text/javascript"},
+                        	{createtag: "script", context: head, src: "libs/communication/websocketconnection.js", type: "text/javascript"},
+                        	{createtag: "script", context: head, src: "libs/communication/rpccommunicator.js", type: "text/javascript"},
+                        	{createtag: "script", context: head, src: "libs/communication/websocketrpcconnection.js", type: "text/javascript"},
+                        	{createtag: "script", context: head, src: "libs/spaceify.js", type: "text/javascript"}
                         	];
 
 			window.parent.spaceifyRequest.loadResources(requiredResources, uniqueName, function()
