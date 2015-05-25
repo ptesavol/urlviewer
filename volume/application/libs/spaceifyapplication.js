@@ -67,13 +67,14 @@ secureWebSocketServer.setConnectionListener(communicator);
 
 self.start = function(port, securePort, key, certificate, authorityCertificate)
 	{
+	console.log("ProvidedService::start() port: "+port+", securePort: "+securePort+", key: "+key+", certificate: "+certificate +", authorityCertificate: "+authorityCertificate);
 	webSocketServer.listen({host: "", port: port}, function(err,data)
 		{
 		if (err)
 			console.log(err);
 		});
 	console.log("websocketsever of "+serviceName+ " started on port "+port);
-	secureWebSocketServer.listen({host: null, port: securePort, is_secure: true, key: key, crt: certificate, ca_crt: authorityCertificate}, function(err,data)
+	secureWebSocketServer.listen({host: "", port: securePort, isSsl: true, sslKey: key, sslCert: certificate, sslAuthCert: authorityCertificate}, function(err,data)
 		{
 		if (err)
 			console.log(err);

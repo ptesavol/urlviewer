@@ -28,7 +28,7 @@ var initializeConnections = function(callback)
 		});	
 	};
 
-var createServiceConnection = function(serviceName, id, callback)
+var createServiceConnection = function(serviceName, callback, id)
 	{
 	coreConnection.callRpc("getService",[serviceName,""], self, function(err, data)
 		{
@@ -54,14 +54,14 @@ var createServiceConnection = function(serviceName, id, callback)
 		});
 	};
 
-var recurseServiceConnections = function(serviceNames, id, callback)
+var recurseServiceConnections = function(serviceNames, callback, id)
 	{
 	if (serviceNames.length > 0)	
 		{
 		createServiceConnection(serviceNames.pop(), id, function()
 			{
 			if (serviceNames.length > 0)
-				recurseServiceConnections(serviceNames, id, callback);
+				recurseServiceConnections(serviceNames, callback);
 			else	
 				callback();			
 			});	

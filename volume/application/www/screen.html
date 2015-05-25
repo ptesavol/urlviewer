@@ -32,13 +32,19 @@
 					
 				spaceify.getConnection("spaceify.org/services/urlviewerscreen").exposeRpcMethod("showUrl", self, self.showUrl);
 				};	
+			
+			self.start = function()
+				{
+				spaceify.getRequiredService("spaceify.org/services/urlviewerscreen").exposeRpcMethod("showUrl", self, self.showUrl);
+                        	spaceify.connect(["spaceify.org/services/urlviewerscreen"], self.onSpaceifyConnected);  
+				};
 			}
 		
 		var urlViewerScreen= new UrlViewerScreen();				
 		
 		window.onload = function() 
-			{
-                        spaceify.connect(["spaceify.org/services/urlviewerscreen"], urlViewerScreen.onSpaceifyConnected);        				
+			{		
+                        urlViewerScreen.start();        				
 			};	
 		
 						

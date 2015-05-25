@@ -317,7 +317,7 @@ self.onMessage = function(messageData, connection)
 self.addConnection = function(conn)
 	{
 	try	{	
-		console.log("RpcCommunicator::addConnection, connectionid was "+conn.getId());	
+		console.log("RpcCommunicator::addConnection");	
 	
 		//Use random connectionId to make ddos a little more difficult
 		

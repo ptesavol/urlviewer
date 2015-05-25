@@ -16,16 +16,22 @@
 			var self = this;			
 			var bigscreenId = "default";  
 		
-			self.onSpaceifyConnected = function()
-				{
-				console.log("UrlViewerTitle::onSpaceifyConnected()");	
-				};
 			
 			self.onUrlGiven = function()
 				{
 				var givenUrl = document.getElementById("urlfield").value;
-                        	var urlViewer=spaceify.getConnection("spaceify.org/services/urlviewer");
-				urlViewer.callRpc("showUrl",[givenUrl,null,null],this, null);
+                        	var urlViewer = spaceify.getRequiredService("spaceify.org/services/urlviewer");
+				urlViewer.callRpc("showUrl",[givenUrl, null, null], self, null);
+				};
+			
+			self.onSpaceifyConnected = function()
+                                {
+                                console.log("UrlViewerTitle::onSpaceifyConnected()");
+                                };
+
+			self.start = function()
+				{
+				spaceify.connect(["spaceify.org/services/urlviewer"], self.onSpaceifyConnected);
 				};		
 			}
 				
@@ -54,7 +60,7 @@
 
 			window.parent.spaceifyRequest.loadResources(requiredResources, uniqueName, function()
 				{
-				spaceify.connect(["spaceify.org/services/urlviewer"], urlViewerTile.onSpaceifyConnected);	
+				urlViewerTile.start();	
 				});
 			};		
 	      
