@@ -116,10 +116,10 @@ self.listen = function(opts, callback)
 				connection.setRemotePort(request.remotePort);
 				connection.setOrigin(request.origin);
 				
-				//var query = URL.parse(request.resourceURL,true).query;		
-				//console.log("WebSocketServer::listen() accepting connection, given id was "+query.id);
-				//if (query && query.id)
-				//	connection.setId(query.id);
+				var query = URL.parse(request.resourceURL,true).query;		
+				console.log("WebSocketServer::listen() accepting connection, given id was "+query.id);
+				if (query && query.id)
+					connection.setId(query.id);
 				
 				connectionListener.addConnection(connection);
 				}
